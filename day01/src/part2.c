@@ -49,13 +49,11 @@ void main()
         {
             b[i] = a[i + 1];
         }
-        
+
         b[WINDOW_SIZE - 1] = atoi(token);
 
         a_sum = sum_array(a, WINDOW_SIZE);
         b_sum = sum_array(b, WINDOW_SIZE);
-
-        printf("%d, %d, %d\n", a[0], a[1], a[2]);
 
         result += (b_sum > a_sum) ? 1 : 0;
 
