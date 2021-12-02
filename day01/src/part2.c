@@ -33,6 +33,11 @@ void main()
         exit(f_err + EX__BASE);
     }
 
+    if (f_size < WINDOW_SIZE)
+    {
+        exit(File_Too_Large + EX__BASE);
+    }
+
     token = strtok(input, "\n");
     // Get first set
     for (int i = 0; (i < WINDOW_SIZE) && (token != NULL); i++)
@@ -57,10 +62,7 @@ void main()
 
         result += (b_sum > a_sum) ? 1 : 0;
 
-        for (int i = 0; i < WINDOW_SIZE; i++)
-        {
-            a[i] = b[i];
-        }
+        memcpy(a, b, sizeof(int)*WINDOW_SIZE);
 
         token = strtok(NULL, "\n");
     } while (token != NULL);
