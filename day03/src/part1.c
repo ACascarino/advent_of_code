@@ -71,7 +71,6 @@ void main()
                 count_1++;
             }
         }
-        printf("%d, %d\n", count_0, count_1);
         gamma += (count_0 > count_1) ? 0 : (1 << (BIT_LENGTH - c - 1));
         epsilon += (count_0 < count_1) ? 0 : (1 << (BIT_LENGTH - c - 1));
     }
