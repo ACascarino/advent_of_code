@@ -5,17 +5,6 @@
 
 #define BIT_LENGTH 12
 
-int find_gamma(int ** bit_array, int rows, int cols)
-{
-    int gamma = 0;
-    
-}
-
-int find_epsilon(int ** bit_array, int rows, int cols)
-{
-
-}
-
 void main()
 {
     FileError f_err;
