@@ -77,4 +77,11 @@ void main()
     result = gamma * epsilon;
 
     printf("%ld\n", result);
+
+    for (int i = 0; i < num_rows; i++)
+    {
+        free(bit_array[i]);
+    }
+    
+    free(bit_array);
 }
