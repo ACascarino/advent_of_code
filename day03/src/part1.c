@@ -9,7 +9,6 @@ void main()
 {
     FileError f_err;
     size_t f_size;
-    char * token;
     int gamma = 0, epsilon = 0;
     long result = 0;
 
