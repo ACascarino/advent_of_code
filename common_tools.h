@@ -12,5 +12,6 @@ typedef enum
 } FileError;
 
 char * c_read_file(const char * f_name, FileError * err, size_t * f_size);
+void print_array(int * array, int length);
 
 #endif // ifndef COMMON_TOOLS_H

@@ -51,3 +51,13 @@ char * c_read_file(const char * f_name, FileError * err, size_t * f_size)
 
     return retval;
 }
+
+void print_array(int * array, int length)
+{
+    while (length--)
+    {
+        printf("%d", *array);
+        *array++;
+    }
+    printf("\n");
+}
