@@ -34,8 +34,8 @@ void get_all_coords(int x1, int x2, int y1, int y2, int ** p_coord_x, int ** p_c
     {
         for (j = 0, x = (reverse ? x2 : x1); x <= (reverse ? x1 : x2); x++, j++)
         {
-            coord_x[j] = x;
-            coord_y[i] = y;
+            coord_x[i+j] = x;
+            coord_y[i+j] = y;
         }
     }
 
@@ -49,7 +49,10 @@ void main()
     FileError f_err;
     size_t f_size;
     long result = 0;
-    int x1, x2, y1, y2, x, y;
+    int x1, x2, y1, y2;
+    int * x_set = NULL;
+    int * y_set = NULL;
+    int set_len = 0;
 
     // Read file
     char * input = c_read_file("input.txt", &f_err, &f_size);
@@ -68,12 +71,58 @@ void main()
         if ((x1 == x2) || (y1 == y2))
         {
             int * coord_x, * coord_y;
-            int i, j = 0, length = 0;
+            int length;
             get_all_coords(x1, x2, y1, y2, &coord_x, &coord_y, &length);
+
+            int new_len = length + set_len;
+            x_set = (int *) realloc(x_set, new_len * sizeof(int));
+            y_set = (int *) realloc(y_set, new_len * sizeof(int));
+
+            memcpy(x_set+set_len, coord_x, length * sizeof(int));
+            memcpy(y_set+set_len, coord_y, length * sizeof(int));
+
+            set_len = new_len;
 
             free(coord_x);
             free(coord_y);
         }
         token = strtok(NULL, "\n");
     } while (token != NULL);
+
+    int max_x = max(x_set, set_len);
+    int max_y = max(y_set, set_len);
+
+    int ** grid = (int **) calloc(max_y+1, sizeof(int *));
+    for (int i = 0; i < max_y+1; i++)
+    {
+        grid[i] = (int *) calloc(max_x+1, sizeof(int));
+    }
+
+    for (int i = 0; i < set_len; i++)
+    {
+        int x = x_set[i];
+        int y = y_set[i];
+        grid[y][x]++;
+    }
+
+    for (int y = 0; y <= max_y; y++)
+    {
+        for (int x = 0; x <= max_x; x++)
+        {
+            if (grid[y][x] > 1)
+            {
+                result++;
+            }
+        }
+    }
+
+    for (int i = 0; i < max_y+1; i++)
+    {
+        free(grid[i]);
+    }
+    free(grid);
+    free(x_set);
+    free(y_set);
+
+    printf("%ld\n", result);
 }

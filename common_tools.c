@@ -61,3 +61,18 @@ void print_array(int * array, int length)
     }
     printf("\n");
 }
+
+int max(int * array, int length)
+{
+    int max = 0;
+
+    for (int i = 0; i < length; i++)
+    {
+        if (array[i] > max)
+        {
+            max = array[i];
+        }
+    }
+
+    return max;
+}
