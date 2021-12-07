@@ -56,7 +56,7 @@ void print_array(int * array, int length)
 {
     while (length--)
     {
-        printf("%d", *array);
+        printf("%d,", *array);
         *array++;
     }
     printf("\n");
@@ -75,4 +75,17 @@ int max(int * array, int length)
     }
 
     return max;
+}
+
+long count_char(char * array, int length, char target)
+{
+    long result = 0;
+    for (int i = 0; i < length; i++)
+    {
+        if (array[i] == target)
+        {
+            result++;
+        }
+    }
+    return result;
 }
