@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include "common_tools.h"
 
 // From https://stackoverflow.com/a/54057690/3791827
@@ -68,13 +69,22 @@ int max(int * array, int length)
 
     for (int i = 0; i < length; i++)
     {
-        if (array[i] > max)
-        {
-            max = array[i];
-        }
+        max = (array[i] > max) ? array[i] : max;
     }
 
     return max;
+}
+
+int min(int * array, int length)
+{
+    int min = INT_MAX;
+
+    for (int i = 0; i < length; i++)
+    {
+        min = (array[i] < min) ? array[i] : min;
+    }
+
+    return min;
 }
 
 long count_char(char * array, int length, char target)
@@ -88,4 +98,46 @@ long count_char(char * array, int length, char target)
         }
     }
     return result;
+}
+
+char * strplace(char * array, char target, char replace)
+{
+    int i = 0;
+    while (array[i] != 0)
+    {
+        char character = array[++i];
+        array[i] = (array[i] == target) ? replace : target;
+    }
+    
+    return array;
+}
+
+char sd_itoa(int input)
+{
+    return (char)(input + 48);
+}
+
+void swap(int *xp, int *yp)
+{
+    int temp = *xp;
+    *xp = *yp;
+    *yp = temp;
+}
+ 
+void alphabetise(char * arr, int n)
+{
+    int i, j, min_idx;
+ 
+    // One by one move boundary of unsorted subarray
+    for (i = 0; i < n-1; i++)
+    {
+        // Find the minimum element in unsorted array
+        min_idx = i;
+        for (j = i+1; j < n; j++)
+          if (arr[j] < arr[min_idx])
+            min_idx = j;
+ 
+        // Swap the found minimum element with the first element
+        swap(&arr[min_idx], &arr[i]);
+    }
 }
