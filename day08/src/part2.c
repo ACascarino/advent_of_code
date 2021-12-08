@@ -198,6 +198,11 @@ void main()
         } while (token != NULL);
 
         result += atoi(composite);
+
+        free(remaining_tokens);
     }
+
+    free(left_sides);
+    free(right_sides);
     printf("%d\n", result);
 }
