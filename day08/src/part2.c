@@ -56,22 +56,18 @@ void main()
             if (len == 2)
             {
                 map[1] = token;
-                printf("1: %s\n", token);
             }
             else if (len == 3)
             {
                 map[7] = token;
-                printf("7: %s\n", token);
             }
             else if (len == 4)
             {
                 map[4] = token;
-                printf("4: %s\n", token);
             }
             else if (len == 7)
             {
                 map[8] = token;
-                printf("8: %s\n", token);
             }
             else
             {
@@ -108,7 +104,6 @@ void main()
                         map[3] = target;
                         remaining_tokens[k] = NULL;
                         j--;
-                        printf("3: %s\n", target);
                         continue;
                     }
 
@@ -133,7 +128,6 @@ void main()
                         map[5] = target;
                         remaining_tokens[k] = NULL;
                         j--;
-                        printf("5: %s\n", target);
                         continue;
                     }
 
@@ -142,7 +136,6 @@ void main()
                     map[2] = target;
                     remaining_tokens[k] = NULL;
                     j--;
-                    printf("2: %s\n", target);
                 }
                 else if (len == 6)
                 {
@@ -159,7 +152,6 @@ void main()
                         map[6] = target;
                         remaining_tokens[k] = NULL;
                         j--;
-                        printf("6: %s\n", target);
                         continue;
                     }
 
@@ -174,7 +166,6 @@ void main()
                         map[0] = target;
                         remaining_tokens[k] = NULL;
                         j--;
-                        printf("0: %s\n", target);
                         continue;
                     }
 
@@ -182,7 +173,6 @@ void main()
                     map[9] = target;
                     remaining_tokens[k] = NULL;
                     j--;
-                    printf("9: %s\n", target);
                 }
             }
         }
@@ -207,7 +197,6 @@ void main()
             token = strtok(NULL, " ");
         } while (token != NULL);
 
-        printf("%s\n", composite);
         result += atoi(composite);
     }
     printf("%d\n", result);
