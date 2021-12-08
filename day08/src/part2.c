@@ -45,7 +45,7 @@ void main()
         char * target_side = left_sides[i];
         
         char * map[10] = {0};
-        char ** remaining_tokens = (char **) calloc(6, sizeof(char *));
+        char * remaining_tokens[6] = {0};
 
         char * token = strtok(target_side, " ");
         int j = 0;
@@ -198,8 +198,6 @@ void main()
         } while (token != NULL);
 
         result += atoi(composite);
-
-        free(remaining_tokens);
     }
 
     free(left_sides);
