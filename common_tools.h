@@ -18,6 +18,7 @@ void print_array(int * array, int length);
 long count_char(char * array, int length, char target);
 char * strplace(char * array, char target, char replace);
 char sd_itoa(int input);
-void alphabetise(char * arr, int n);
+int ctoi(char input);
+void diff(int * input, int * output, int length);
 
 #endif // ifndef COMMON_TOOLS_H

@@ -92,10 +92,7 @@ long count_char(char * array, int length, char target)
     long result = 0;
     for (int i = 0; i < length; i++)
     {
-        if (array[i] == target)
-        {
-            result++;
-        }
+        result += (array[i] == target);
     }
     return result;
 }
@@ -117,27 +114,40 @@ char sd_itoa(int input)
     return (char)(input + 48);
 }
 
-void swap(int *xp, int *yp)
+int ctoi(char input)
 {
-    int temp = *xp;
-    *xp = *yp;
-    *yp = temp;
+    return (int)(input - 48);
 }
- 
-void alphabetise(char * arr, int n)
+
+void diff(int * input, int * output, int length)
 {
-    int i, j, min_idx;
- 
-    // One by one move boundary of unsorted subarray
-    for (i = 0; i < n-1; i++)
+    for (int i = 0; i < length-1; i++)
     {
-        // Find the minimum element in unsorted array
-        min_idx = i;
-        for (j = i+1; j < n; j++)
-          if (arr[j] < arr[min_idx])
-            min_idx = j;
- 
-        // Swap the found minimum element with the first element
-        swap(&arr[min_idx], &arr[i]);
+        output[i] = input[i+1] - input[i];
     }
 }
+
+// void swap(int *xp, int *yp)
+// {
+//     int temp = *xp;
+//     *xp = *yp;
+//     *yp = temp;
+// }
+ 
+// void alphabetise(char * arr, int n)
+// {
+//     int i, j, min_idx;
+ 
+//     // One by one move boundary of unsorted subarray
+//     for (i = 0; i < n-1; i++)
+//     {
+//         // Find the minimum element in unsorted array
+//         min_idx = i;
+//         for (j = i+1; j < n; j++)
+//           if (arr[j] < arr[min_idx])
+//             min_idx = j;
+ 
+//         // Swap the found minimum element with the first element
+//         swap(&arr[min_idx], &arr[i]);
+//     }
+// }
