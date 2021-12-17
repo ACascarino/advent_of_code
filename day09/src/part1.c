@@ -33,10 +33,8 @@ void main()
             board[i][j] = ctoi(input[k++]);
             marked[i][j] = 0;
             k += (input[k] == '\n');
-            // printf("%d ", board[i][j]);
         }
         diff(board[i], diff_board[i], number_of_cols);
-        // printf("\n");
     }
 
     for (int i = 0; i < number_of_lines; i++)
