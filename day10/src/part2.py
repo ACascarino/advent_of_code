@@ -42,10 +42,10 @@ if __name__ == "__main__":
         priority = 1
         corrupt = False
         for character in line:
-            if character in ('(', '[', '<', '{'):
+            if character in OPENING_BRACE.values():
                 chunks.append((character,priority))
                 priority += 1
-            elif character in (')', ']', '>', '}'):
+            elif character in CLOSING_BRACE.values():
                 priority -=1
                 target = [k for k,v in chunks if k == OPENING_BRACE[character] and v == priority]
                 if not target:
