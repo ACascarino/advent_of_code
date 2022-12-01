@@ -1,5 +1,4 @@
 import part1
-import numbers
 
 
 class SortableElf(part1.Elf):
@@ -8,9 +7,7 @@ class SortableElf(part1.Elf):
 
     def __lt__(self, other):
         if isinstance(other, type(self)):
-            return self.calories > other.calories
-        elif isinstance(other, numbers.Number):
-            return self.calories > other
+            return self.calories < other.calories
         else:
             raise NotImplementedError
 
@@ -20,7 +17,7 @@ class SensibleExpedition(part1.Expedition):
         super().__init__()
 
     def get_top_elves(self, x):
-        sorted_elves = sorted(self.elves)
+        sorted_elves = sorted(self.elves, reverse=True)
         return (sorted_elves[idx] for idx in range(x))
 
 

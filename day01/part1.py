@@ -1,6 +1,3 @@
-import numbers
-
-
 class Elf:
     def __init__(self, calories):
         self.calories = calories
@@ -8,8 +5,6 @@ class Elf:
     def __gt__(self, other):
         if isinstance(other, type(self)):
             return self.calories > other.calories
-        elif isinstance(other, numbers.Number):
-            return self.calories > other
         else:
             raise NotImplementedError
 
