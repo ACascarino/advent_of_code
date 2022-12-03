@@ -13,7 +13,7 @@ class Rucksack:
         self.comp_one, self.comp_two = map(set, split_string_in_half(input))
 
     def get_common_items(self):
-        return self.comp_one.intersection(self.comp_two)
+        return set.intersection(self.comp_one, self.comp_two)
 
     def get_item_value(self, item: str):
         if item.islower():
