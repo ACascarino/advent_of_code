@@ -2,28 +2,27 @@ import part1
 from typing import Tuple
 
 
-class TripleRucksack(part1.Rucksack):
+def make_collections(iterable, size):
+    return zip(*(iter(iterable),) * size)
+
+
+class TripleRucksack:
     def __init__(self, input: Tuple[str, str, str]) -> None:
         self.rucksacks = map(set, input)
 
-    def get_common_items(self):
-        return set.intersection(*self.rucksacks)
+    def get_common_item(self) -> str:
+        return set.intersection(*self.rucksacks).pop()
 
 
 if __name__ == "__main__":
+    item_values = part1.generate_item_values()
     with open("input.txt", "r") as file:
         puzzle_input = file.read()
     rucksack_contents = puzzle_input.split("\n")
-    rucksack_triples = []
-    for idx in range(len(rucksack_contents) // 3):
-        triple = []
-        for rucksack in range(3):
-            triple.append(rucksack_contents.pop(0))
-        rucksack_triples.append(tuple(triple))
+    rucksack_triples = make_collections(rucksack_contents, 3)
 
     rucksacks = [TripleRucksack(x) for x in rucksack_triples]
     common_item_values = list(
-        rucksack.get_item_value(rucksack.get_common_items().pop())
-        for rucksack in rucksacks
+        item_values[rucksack.get_common_item()] for rucksack in rucksacks
     )
     print(sum(common_item_values))
