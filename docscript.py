@@ -6,12 +6,15 @@ for child in here.rglob("**/day*"):
     newcppdir = child / "cpp"
     newpydir.mkdir(parents=True, exist_ok=True)
     newcppdir.mkdir(parents=True, exist_ok=True)
-
-    with (newpydir / "part1.py").open("w") as file:
+    with (child / "input.txt").open("a") as file:
         file.write("")
-    with (newpydir / "part2.py").open("w") as file:
+    with (child / "test.txt").open("a") as file:
         file.write("")
-    with (newcppdir / "part1.cpp").open("w") as file:
+    with (newpydir / "part1.py").open("a") as file:
         file.write("")
-    with (newcppdir / "part2.cpp").open("w") as file:
+    with (newpydir / "part2.py").open("a") as file:
+        file.write("")
+    with (newcppdir / "part1.cpp").open("a") as file:
+        file.write("")
+    with (newcppdir / "part2.cpp").open("a") as file:
         file.write("")
