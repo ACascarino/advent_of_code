@@ -1,14 +1,14 @@
-def range1(start, end):
+def range1(start: int, end: int) -> range:
     return range(start, end + 1)
 
 
 class Pair:
-    def __init__(self, line) -> None:
+    def __init__(self, line: str) -> None:
         left, right = line.split(",")
         self.left_range = set(range1(*map(int, left.split("-"))))
         self.right_range = set(range1(*map(int, right.split("-"))))
 
-    def is_there_full_overlap(self):
+    def is_there_full_overlap(self) -> bool:
         if self.left_range >= self.right_range or self.right_range >= self.left_range:
             return True
         else:

@@ -2,10 +2,10 @@ import part1
 
 
 class OverlappingPair(part1.Pair):
-    def __init__(self, line) -> None:
+    def __init__(self, line: str) -> None:
         super().__init__(line)
 
-    def is_there_any_overlap(self):
+    def is_there_any_overlap(self) -> bool:
         if set.intersection(self.left_range, self.right_range):
             return True
         else:
