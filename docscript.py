@@ -21,3 +21,6 @@ for child in here.rglob("**/day*"):
         file.write("")
     with (newcppdir / "part2.cpp").open("a") as file:
         file.write("")
+
+    with (child / "CMakeLists.txt").open("a") as file:
+        file.write("")
