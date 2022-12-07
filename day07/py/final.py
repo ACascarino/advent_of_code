@@ -1,5 +1,6 @@
 import operator
 import itertools
+import typing
 
 
 class Cd:
@@ -16,7 +17,7 @@ class ConsoleOutput:
     def __init__(self, console: str) -> None:
         self.console = console.splitlines()
 
-    def __iter__(self) -> str:
+    def __iter__(self) -> (Cd | Ls):
         for line_idx, line in enumerate(self.console):
             if line.startswith("$"):
                 if (cd_start := line.find("cd")) != -1:
@@ -24,7 +25,7 @@ class ConsoleOutput:
                 elif (line.find("ls")) != -1:
                     yield Ls(self.get_next_noncommand_lines(line_idx))
 
-    def get_next_noncommand_lines(self, start_idx):
+    def get_next_noncommand_lines(self, start_idx: int) -> list[str]:
         result = list()
         num_commands = len(self.console)
         while True:
@@ -67,7 +68,7 @@ class Directory(FileObject):
         self.parent = parent
         self.children = {}
 
-    def add_children(self, new_children: list[str]):
+    def add_children(self, new_children: list[str]) -> None:
         for child in new_children:
             p1, p2 = child.split()
             if p1 == "dir":
@@ -75,13 +76,19 @@ class Directory(FileObject):
             else:
                 self.children |= {p2: FileObject(name=p2, size=int(p1))}
 
-    def parse_cd(self, target):
+    def parse_cd(self, target) -> typing.Self:
         if target == "..":
             return self.parent
         else:
             return self.children.get(target, self)
 
-    def query(self, node_type, querying, operation, value):
+    def query(
+        self,
+        node_type: typing.Type[FileObject],
+        querying: str,
+        operation: typing.Callable[[int, int], bool],
+        value: int,
+    ) -> itertools.chain:
         self_results = (
             child
             for child in self.children.values()
@@ -107,7 +114,7 @@ class Console:
         self.root = root
         self.cwd = root
 
-    def process_commands(self, commands: ConsoleOutput):
+    def process_commands(self, commands: ConsoleOutput) -> None:
         for command in commands:
             if isinstance(command, Cd):
                 if command.target == "/":
