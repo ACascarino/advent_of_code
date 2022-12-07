@@ -118,12 +118,12 @@ class Directory:
             self_results = (
                 child
                 for child in self.children.values()
-                if child.size <= value and type(child) == Directory
+                if child.size <= value and isinstance(child, Directory)
             )
             child_results = (
                 child.query(node_type, querying, operation, value)
                 for child in self.children.values()
-                if type(child) == Directory
+                if isinstance(child, Directory)
             )
 
             results = []
