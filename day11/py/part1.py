@@ -73,6 +73,7 @@ class Monkey:
     def operate_single(self, item):
         self.inspect_count += 1
         self.do_operation(item)
+        item.worry //= 3
         return self.test_item(item)
 
     def operate(self):
@@ -100,7 +101,7 @@ class MonkeyCollection:
 
 
 if __name__ == "__main__":
-    with open("test.txt", "r") as file:
+    with open("input.txt", "r") as file:
         puzzle_input = file.read()
 
 monkeys = list()
