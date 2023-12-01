@@ -1,6 +1,6 @@
 class DocumentPart1:
     ALPHA_REMOVE_TABLE = str.maketrans(
-        "", "", "abcdefghijklmnopqrstuvwxyzABSCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "", "", "".join([chr(x) for x in range(ord("a"), ord("Z")+1)])
     )
 
     def __init__(self, text: str) -> None:
