@@ -33,17 +33,25 @@ class SchematicPart1:
 
         return part_numbers
 
-    def is_neighbouring_symbol(self, row: int, cols: list[int]) -> bool:
+    def get_neighbour_idxs(self, row: int, cols: list[int]) -> list[int]:
         l = (min(cols) - 1) if (min(cols) - 1 >= 0) else 0
         r = (max(cols) + 1) if (max(cols) + 1 <= self.n_cols) else self.n_cols
         up = row - 1 if row - 1 >= 0 else None
         down = row + 1 if row + 1 <= self.n_rows else None
 
-        row_up = self.schematic[up][l : r + 1] if up is not None else ""
-        row_left = self.schematic[row][l] if l != 0 else ""
-        row_right = self.schematic[row][r] if r != self.n_cols else ""
-        row_down = self.schematic[down][l : r + 1] if down is not None else ""
-        target = row_up + row_left + row_right + row_down
+        return [l, r, up, down]
+
+    def get_adjacent(self, l: int, r: int, u: int, m: int, d: int) -> list[str]:
+        row_up = self.schematic[u][l : r + 1] if u is not None else ""
+        row_left = self.schematic[m][l] if l != 0 else ""
+        row_right = self.schematic[m][r] if r != self.n_cols else ""
+        row_down = self.schematic[d][l : r + 1] if d is not None else ""
+
+        return [row_up, row_left, row_right, row_down]
+
+    def is_neighbouring_symbol(self, row: int, cols: list[int]) -> bool:
+        l, r, up, down = self.get_neighbour_idxs(row, cols)
+        target = "".join(self.get_adjacent(l, r, up, row, down))
 
         return self.has_symbol(target)
 
