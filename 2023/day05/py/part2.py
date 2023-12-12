@@ -18,17 +18,6 @@ class AlmanacPart2(Almanac):
             pages.append(page)
         return list(reversed(pages))
 
-    def reverse_pages(self, target: int) -> int:
-        for idx in p:
-            target = self.reverse_lookup(idx, target)
-        return target
-
-    def reverse_lookup(self, page_no: int, value: int) -> int:
-        for domain, constant in self.pages[page_no].items():
-            if (value - constant) in domain:
-                return value - constant
-        return value
-
     def convert_seed_list(self) -> list[range]:
         seeds_paired = zip(self.seeds[::2], self.seeds[1::2])
         return [range(start, start + length) for start, length in seeds_paired]
