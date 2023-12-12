@@ -1,3 +1,6 @@
+ConstMap = dict[range, int]
+
+
 class Almanac:
     toc = {
         "seed-to-soil": 0,
@@ -19,7 +22,7 @@ class Almanac:
         seed_txt = pages_txt[0].split(":")[1].strip()
         return [int(x) for x in seed_txt.split()]
 
-    def read_pages(self, pages_txt: list[str]) -> list[dict]:
+    def read_pages(self, pages_txt: list[str]) -> list[ConstMap]:
         pages = []
         for page_txt in pages_txt[1:]:
             contents = page_txt.splitlines()[1:]
