@@ -2,7 +2,7 @@ import inspect
 import pathlib
 
 INPUT_FILE_NAME = "input.txt"
-TEST_FILE_NAME = "test.txt"
+TEST_FILE_NAME = "test{0}.txt"
 
 
 def read_file(file_path: pathlib.Path) -> str:
@@ -15,8 +15,8 @@ def read_input(day_path: pathlib.Path) -> str:
     return read_file(day_path / INPUT_FILE_NAME)
 
 
-def read_test(day_path: pathlib.Path) -> str:
-    return read_file(day_path / TEST_FILE_NAME)
+def read_test(day_path: pathlib.Path, number=0) -> str:
+    return read_file(day_path / TEST_FILE_NAME.format("" if number == 0 else number))
 
 
 def here(extra_layers: int = 0) -> pathlib.Path:
@@ -32,6 +32,6 @@ def get_input() -> str:
     return read_input(day_path)
 
 
-def get_test() -> str:
+def get_test(number=0) -> str:
     day_path = day_dir(extra_layers=1)
-    return read_test(day_path)
+    return read_test(day_path, number)
