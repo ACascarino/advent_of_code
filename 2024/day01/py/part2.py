@@ -3,8 +3,7 @@ import collections
 
 
 def app(puzzle_input: str) -> int:
-    lines = (line.strip() for line in puzzle_input.splitlines())
-    left, right = zip(*(line.split() for line in lines))
+    left, right = zip(*aoc_utils.input_split_int(puzzle_input))
     r_counts = collections.Counter(right)
     return sum(int(i) * r_counts[i] for i in left)
 

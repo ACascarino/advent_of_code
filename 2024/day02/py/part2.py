@@ -40,10 +40,7 @@ def dampened_safe(report: list[int]):
 
 
 def app(puzzle_input: str) -> int:
-    reports = (
-        [int(level) for level in line.strip().split()]
-        for line in puzzle_input.splitlines()
-    )
+    reports = aoc_utils.input_split_int(puzzle_input)
 
     return sum(safe(report) or dampened_safe(report) for report in reports)
 
