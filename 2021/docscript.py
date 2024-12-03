@@ -3,6 +3,5 @@ import shutil
 
 folder_2021 = aoc_utils.here().parent
 for subfolder in folder_2021.glob("day*"):
-    if (subfolder / "c").exists():
-        if not sorted((subfolder / "c").glob("*.py")) == []:
-            shutil.rmtree(subfolder / "c")
+    if not (subfolder / "c").exists() or (subfolder / "py").exists():
+        shutil.rmtree(subfolder)
