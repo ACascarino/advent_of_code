@@ -41,7 +41,8 @@ def dampened_safe(report: list[int]):
 
 def app(puzzle_input: str) -> int:
     reports = (
-        [int(level) for level in line.strip().split()] for line in puzzle_input.splitlines()
+        [int(level) for level in line.strip().split()]
+        for line in puzzle_input.splitlines()
     )
 
     return sum(safe(report) or dampened_safe(report) for report in reports)
