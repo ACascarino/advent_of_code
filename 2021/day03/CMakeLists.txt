@@ -4,5 +4,5 @@ project(AOC21   VERSION 1.0
 
 set(CMAKE_BUILD_TYPE Debug)
 
-add_executable(part1 src/part1.c ../common_tools.c)
-add_executable(part2 src/part2.c ../common_tools.c)
+add_executable(part1 c/part1.c ../common_tools.c)
+add_executable(part2 c/part2.c ../common_tools.c)
