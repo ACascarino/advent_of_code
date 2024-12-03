@@ -1,9 +1,5 @@
+import advent_of_code_utils as aoc_utils
 import itertools
-import pathlib
-
-
-def say(x):
-    print("\n", x)
 
 
 def cmp(a: int, b: int):
@@ -16,17 +12,14 @@ def safe(report: list[int]):
     return all(1 <= x <= 3 for x in diffs) and (abs(cmps) == len(report) - 1)
 
 
-def app(input_path: pathlib.Path):
-    with open(input_path, "rt") as f:
-        input = f.read()
+def app(puzzle_input: str) -> int:
     reports = (
-        [int(level) for level in line.strip().split()] for line in input.splitlines()
+        [int(level) for level in line.strip().split()] for line in puzzle_input.splitlines()
     )
 
     return sum(safe(report) for report in reports)
 
 
 if __name__ == "__main__":
-    here = pathlib.Path(__file__).absolute()
-    result = app(here.parent.parent / "input.txt")
-    say(result)
+    solution = app(aoc_utils.get_input())
+    aoc_utils.say(solution)
