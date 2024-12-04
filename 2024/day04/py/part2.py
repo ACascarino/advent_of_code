@@ -1,34 +1,51 @@
 import advent_of_code_utils as aoc_utils
 import re
-
-MAS_COUTERPARTS = {"S.S": "M.M", "S.M": "S.M", "M.S": "M.S", "M.M": "S.S"}
-
-
-def check_xmas(grid: list[str]) -> int:
-    return sum(line.count("XMAS") + line.count("SAMX") for line in grid)
+import typing
 
 
-def rot90_strings(mat: list[str]) -> list[str]:
-    return list("".join(list(x)) for x in zip(*mat))[::-1]
+SS = 0
+SM = 1
+MS = 2
+MM = 3
 
 
-def rot45_strings(mat: list[str]) -> list[str]:
-    # We assume here that mat is square
-    m = n = len(mat[0])
-    return [
-        "".join([mat[i][j] for j in range(n) for i in range(m) if i + j == layer])
-        for layer in range(2 * n - 1)
-    ]
+MAS_COUNTERPARTS = {
+    SS: MM,
+    SM: SM,
+    MS: MS,
+    MM: SS,
+}
+
+
+def non_none(check: tuple[typing.Any | None, ...]) -> int:
+    return [i for i, x in enumerate(check) if x is not None][0]
 
 
 def app(puzzle_input: str) -> int:
     lines = puzzle_input.splitlines()
-    for lno, line in enumerate(lines):
-        matches = re.finditer(r"(?=((S|M).(S|M)))", line)
-        results = [(match.start(), match.group(1)) for match in matches]
-        print(lno, *results)
+    all_matches: list[dict[int, tuple[str, str, str, str]]] = []
+    solution = 0
+
+    for line in lines:
+        matches = re.finditer(r"(?=(S.S)|(S.M)|(M.S)|(M.M))", line)
+        all_matches.append({match.start(): match.groups() for match in matches})
+
+    for line_no, match_set in enumerate(all_matches[:-2]):
+        for char_no, ends in match_set.items():
+            matched = non_none(ends)
+            # is there a match at the same position 2 lines down?
+            if char_no in all_matches[line_no + 2]:
+                # is it complementary?
+                other_end = all_matches[line_no + 2][char_no]
+                other_matched = non_none(other_end)
+                if MAS_COUNTERPARTS[matched] == other_matched:
+                    # is there an A in the middle?
+                    if lines[line_no + 1][char_no + 1] == "A":
+                        solution += 1
+
+    return solution
 
 
 if __name__ == "__main__":
-    solution = app(aoc_utils.get_test())
+    solution = app(aoc_utils.get_input())
     aoc_utils.say(solution)
