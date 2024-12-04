@@ -12,9 +12,8 @@ def app(puzzle_input: str) -> int:
                 mul = False
             case ("", "", "do()", ""):
                 mul = True
-            case (a, b, "", ""):
-                if mul:
-                    solution += int(a) * int(b)
+            case (a, b, "", "") if mul:
+                solution += int(a) * int(b)
     return solution
 
 
