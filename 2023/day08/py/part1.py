@@ -20,15 +20,12 @@ def app(puzzle_input: str) -> int:
     instructions, *nodes = lines
     network = build_network(nodes)
 
-    starting_node = "AAA"
-    current_node = starting_node
-    instruction_pointer = 0
+    current_node = "AAA"
     steps = 0
 
     while current_node != "ZZZ":
-        direction = DIRECTIONS[instructions[instruction_pointer]]
+        direction = DIRECTIONS[instructions[steps % len(instructions)]]
         current_node = network[current_node][direction]
-        instruction_pointer = (instruction_pointer + 1) % len(instructions)
         steps += 1
 
     return steps
