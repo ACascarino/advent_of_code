@@ -23,7 +23,9 @@ def non_none(check: tuple[typing.Any | None, ...]) -> int:
 
 def app(puzzle_input: str) -> int:
     lines = puzzle_input.splitlines()
-    all_matches: list[dict[int, tuple[str, str, str, str]]] = []
+    all_matches: list[
+        dict[int, tuple[str | None, str | None, str | None, str | None]]
+    ] = []
     solution = 0
 
     for line in lines:
