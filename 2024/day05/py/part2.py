@@ -45,19 +45,39 @@ class Book:
             self.fix(rules)
             return True
 
-    def fix(self, rules: "Ruleset") -> bool:
-        pass
+    def fix(self, rules: "Ruleset"):
+        rules.rationalise()
+        self.pages = sorted(self.pages, key=rules.ranks.get)
+        self.middle_page = self.pages[len(self.pages) // 2]
 
 
 class Ruleset:
     def __init__(self, rules: list[Rule]):
         self.rules = rules
+        self.ranks: dict[int, int] = dict()
 
     def __iter__(self):
         return iter(self.rules)
 
     def get_rules(self, book: Book) -> "Ruleset":
         return Ruleset([rule for rule in self if all(page in book for page in rule)])
+
+    def rationalise(self) -> None:
+        ranks = {
+            x: 0
+            for x in {
+                *(rule.before for rule in self.rules),
+                *(rule.after for rule in self.rules),
+            }
+        }
+        changed = True
+        while changed == True:
+            changed = False
+            for rule in self:
+                if ranks[rule.before] >= ranks[rule.after]:
+                    ranks[rule.before] = ranks[rule.after] - 1
+                    changed = True
+        self.ranks = ranks
 
 
 def app(puzzle_input: str) -> int:
