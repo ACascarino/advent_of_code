@@ -66,8 +66,8 @@ class Ruleset:
         ranks = {
             x: 0
             for x in {
-                *(rule.before for rule in self.rules),
-                *(rule.after for rule in self.rules),
+                *(rule.before for rule in self),
+                *(rule.after for rule in self),
             }
         }
         changed = True
