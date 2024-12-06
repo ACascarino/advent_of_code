@@ -32,7 +32,7 @@ class Book:
     def __iter__(self):
         return iter(self.pages)
 
-    def obeys(self, rules: list[Rule]) -> bool:
+    def obeys(self, rules: "Ruleset") -> bool:
         return all(
             self.pages.index(rule.before) < self.pages.index(rule.after)
             for rule in rules
@@ -46,8 +46,8 @@ class Ruleset:
     def __iter__(self):
         return iter(self.rules)
 
-    def get_rules(self, book: Book) -> list[Rule]:
-        return [rule for rule in self if all(page in book for page in rule)]
+    def get_rules(self, book: Book) -> "Ruleset":
+        return Ruleset([rule for rule in self if all(page in book for page in rule)])
 
 
 def app(puzzle_input: str) -> int:
