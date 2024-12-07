@@ -1,7 +1,14 @@
+import enum
 import typing
 
 
 class Point:
+    class Directions(enum.Enum):
+        NORTH = 0
+        EAST = 1
+        SOUTH = 2
+        WEST = 3
+
     def __init__(self, x: int, y: int):
         self.x = x
         self.y = y
@@ -45,7 +52,15 @@ class Point:
         return self.down()
 
     def east(self) -> "Point":
-        return self.left()
+        return self.right()
 
     def west(self) -> "Point":
-        return self.right()
+        return self.left()
+
+    def travel(
+        self,
+        direction: typing.Literal[
+            Directions.NORTH, Directions.EAST, Directions.SOUTH, Directions.WEST
+        ],
+    ):
+        return (self.north, self.east, self.south, self.west)[direction.value]()
